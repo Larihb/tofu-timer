@@ -1,3 +1,0 @@
-([('TofuTimer',
-   '/Users/yingko/Downloads/tofu/tofu_timer_project/tofu_timer_project/dist/TofuTimer',
-   'EXECUTABLE')],)
