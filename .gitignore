@@ -1,0 +1,42 @@
+# FOTOS PESSOAIS - NUNCA ENVIAR (exceto memorial)
+web/tofu[0-9]*.jpeg
+web/tofu[0-9]*.jpg  
+web/tofu[0-9]*.png
+web/personal_photos/*
+!web/personal_photos/README.txt
+
+# Build artifacts
+TofuTimer-*/
+TofuTimer-*.zip
+dist/
+build/
+*.spec
+
+# System files
+.DS_Store
+*/.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PERMITIR: Memorial do Tofu real e assets do app
+!web/real_tofu.png
+!web/tofu_idle.gif
+!web/tofu_petted.gif
+!web/couple.gif
+!web/tofu.png

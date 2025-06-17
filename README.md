@@ -205,7 +205,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <div align="center">
   <img src="web/real_tofu.png" width="200" alt="The real Tofu" style="border-radius: 10px;">
-  <p><em>The real Tofu (2018-2023) - Forever in our hearts 🌈</em></p>
+  <p><em>The real Tofu (2022-2024) - Forever in our hearts 🌈</em></p>
   
   <p>Made with 💖 for productivity and in memory of a very special cat</p>
   <p>⭐ Star this repo if Tofu's spirit helped you focus! ⭐</p>
