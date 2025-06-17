@@ -99,3 +99,14 @@ TofuTimer-*
 
 # Local config
 config.local.json
+echo "
+# FOTOS PESSOAIS - NUNCA ENVIAR
+web/tofu*.jpeg
+web/tofu*.jpg  
+web/tofu*.png
+web/real_tofu.*
+web/personal_photos/
+TofuTimer-*/
+TofuTimer-*.zip
+dist/
+build/" >> .gitignore
