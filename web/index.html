@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tofu's Timer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🐾 Tofu's Timer 🐾</h1>
+
+  <!-- Tofu centered with speech bubble -->
+  <div class="tofu-container">
+    <img src="tofu_idle.gif" alt="Tofu" class="tofu-image" id="tofuImage">
+    <div class="speech-bubble" id="speechBubble">you can<br>do it</div>
+  </div>
+
+  <!-- Timer display below Tofu -->
+  <div class="timer-display" id="timerDisplay">00:00</div>
+
+  <p>How many minutes?</p>
+  <div class="controls-container">
+    <input type="number" id="timeInput" value="5" min="1" max="120">
+    <button onclick="startFocus()" id="startButton">START</button>
+    <button onclick="toggleTodoList()" class="todo-button">
+      <span class="clipboard-icon"></span>
+    </button>
+  </div>
+  <p id="message"></p>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <!-- Segments will be created by JavaScript -->
+    </div>
+    <!-- Couple GIF OUTSIDE the bar -->
+    <div class="progress-couple-gif" id="progressCoupleGif"></div>
+  </div>
+
+  <!-- Floating gift notification -->
+  <div class="gift-notification" id="giftNotification">
+    <div class="gift-box" id="giftBox">
+      🎁
+    </div>
+    <div class="gift-message">New gift! Click to open! 💕</div>
+  </div>
+
+  <!-- Statistics Popup -->
+  <div class="stats-popup" id="statsPopup">
+    <div class="stats-content">
+      <h2>📊 Your Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-info">
+            <div class="stat-value" id="popupTotalHours">0.0h</div>
+            <div class="stat-label">Total Focus Time</div>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">📚</div>
+          <div class="stat-info">
+            <div class="stat-value" id="popupTotalSessions">0</div>
+            <div class="stat-label">Sessions</div>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">🎁</div>
+          <div class="stat-info">
+            <div class="stat-value" id="popupGiftsEarned">0</div>
+            <div class="stat-label">Gifts Earned</div>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">📅</div>
+          <div class="stat-info">
+            <div class="stat-value" id="popupLastDate">Never</div>
+            <div class="stat-label">Last Focus</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stats-tip">
+        💡 Focus for 1 hour to earn a photo reward from your personal collection!
+      </div>
+      
+      <button class="view-gifts-btn" onclick="showGiftsGallery()">🎁 View Photo Gallery</button>
+      <button class="close-stats-btn" onclick="closeStats()">OK</button>
+    </div>
+  </div>
+
+  <!-- Gift Popup (Personal Photo) -->
+  <div class="gift-popup" id="giftPopup">
+    <div class="gift-content">
+      <h2>🎁 Your Reward!</h2>
+      <div class="gift-photo-frame">
+        <img id="giftPhoto" src="" alt="Personal Photo" class="gift-photo">
+      </div>
+      <div class="gift-love-message" id="giftLoveMessage">
+        💕 Great job! You focused for 1 hour! Keep up the amazing work! 💕
+      </div>
+      <button class="close-gift-btn" onclick="closeGift()">Thank you! 😊</button>
+    </div>
+  </div>
+
+  <!-- To-Do List Popup -->
+  <div class="todo-popup" id="todoPopup">
+    <div class="todo-content-small">
+      <h3>📝 Tasks</h3>
+      
+      <div class="todo-input-small">
+        <input type="text" id="taskInput" placeholder="New task..." maxlength="60">
+        <button onclick="addTask()" class="add-task-small">+</button>
+      </div>
+      
+      <div class="tasks-container-small">
+        <div id="tasksList"></div>
+      </div>
+      
+      <button class="close-todo-small" onclick="toggleTodoList()">×</button>
+    </div>
+  </div>
+
+  <!-- Photo Gallery -->
+  <div class="gifts-gallery-popup" id="giftsGalleryPopup">
+    <div class="gifts-gallery-content">
+      <h2>🎁 My Photo Collection 🎁</h2>
+      <div class="gifts-gallery-grid" id="giftsGalleryGrid">
+        <!-- Gifts will be inserted here -->
+      </div>
+      <button class="close-gallery-btn" onclick="closeGiftsGallery()">Close</button>
+    </div>
+  </div>
+
+  <!-- Multiple audio elements to ensure it works -->
+  <audio id="completionSound" preload="auto" style="display: none;">
+    <source src="notification.mp3" type="audio/mpeg">
+    <source src="notification.ogg" type="audio/ogg">
+    <source src="notification.wav" type="audio/wav">
+  </audio>
+  
+  <!-- Backup audio -->
+  <audio id="backupSound" preload="auto" style="display: none;">
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Scripts in correct order -->
+  <script type="text/javascript" src="/eel.js"></script>
+  <script>
+    // IMPORTANT: Global function to avoid loading issues
+    window.startFocus = function() {
+      console.log('🚀 startFocus global called');
+      if (typeof window.mainStartFocus === 'function') {
+        window.mainStartFocus();
+      } else {
+        console.log('⚠️ Main function not loaded yet, trying again...');
+        setTimeout(() => {
+          if (typeof window.mainStartFocus === 'function') {
+            window.mainStartFocus();
+          }
+        }, 100);
+      }
+    };
+    
+    // Wait for complete loading
+    window.addEventListener('load', function() {
+      console.log('🌐 Page loaded completely');
+      
+      // Prepare audio context silently without playing sound
+      let audioContextReady = false;
+      document.addEventListener('click', function prepareAudio() {
+        if (!audioContextReady) {
+          audioContextReady = true;
+          console.log('🔊 Audio context prepared silently');
+          
+          // Only prepare context without playing anything
+          try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            // Don't play anything, just prepare the context
+          } catch (e) {
+            console.log('Audio context not available');
+          }
+          
+          document.removeEventListener('click', prepareAudio);
+        }
+      });
+      
+      // Check backend status after 1 second
+      setTimeout(() => {
+        if (typeof eel !== 'undefined') {
+          try {
+            eel.get_timer_status()(function(status) {
+              console.log('✅ Connected to Python backend:', status);
+            });
+          } catch (error) {
+            console.log('⚠️ Backend not available yet:', error);
+          }
+        }
+      }, 1000);
+    });
+  </script>
+  <script src="main.js"></script>
+  
+  <script>
+    // Ensure global function works
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for main.js to load completely
+      setTimeout(() => {
+        if (typeof startFocus === 'function') {
+          window.mainStartFocus = startFocus;
+          console.log('✅ startFocus function globally linked');
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>

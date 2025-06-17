@@ -1,0 +1,16 @@
+# Tofu Timer - Python Dependencies
+# Compatible with Python 3.7+
+
+# Core framework for desktop app
+eel>=0.14.0
+
+# For building executables (optional)
+pyinstaller>=4.0
+
+# Standard library modules (included with Python)
+# - threading
+# - time 
+# - os
+# - sys
+# - socket
+# - platform

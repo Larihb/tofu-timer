@@ -1,0 +1,1191 @@
+body {
+  background-color: #ffe066;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  color: #000;
+  padding: 20px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 20px 0;
+  text-shadow: 2px 2px 0px #ff8b60;
+  letter-spacing: 1px;
+}
+
+/* Timer display */
+.timer-display {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 15px 25px;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 8px;
+  text-shadow: none;
+  color: #000;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.timer-display.running {
+  background: #e8f5e8;
+  border-color: #4CAF50;
+  color: #2e7d32;
+}
+
+.timer-display.warning {
+  background: #fff3e0;
+  border-color: #ff9800;
+  color: #e65100;
+  animation: pulse 1s infinite;
+}
+
+.timer-display.danger {
+  background: #ffebee;
+  border-color: #f44336;
+  color: #c62828;
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Animação wiggle para o Tofu */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-5deg) scale(1.05); }
+  75% { transform: rotate(5deg) scale(1.05); }
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
+  padding: 12px 24px;
+  margin: 10px;
+  background: linear-gradient(to bottom, #FF9800, #F57C00);
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  border-radius: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 0px #E65100;
+  font-size: 12px;
+  position: relative;
+  
+  box-shadow: 
+    0 6px 0 #E65100,
+    0 8px 0 #BF360C,
+    0 10px 10px rgba(0,0,0,0.3);
+  
+  border-top: 3px solid #FFB74D;
+  border-left: 2px solid #FFB74D;
+  border-right: 2px solid #FF9800;
+  
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #FFB74D, #FF9800);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 0 #E65100,
+    0 10px 0 #BF360C,
+    0 12px 15px rgba(0,0,0,0.4);
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 2px 0 #E65100,
+    0 4px 0 #BF360C,
+    0 6px 5px rgba(0,0,0,0.2);
+}
+
+button.stop-button {
+  background: linear-gradient(to bottom, #F44336, #C62828);
+  border-top: 3px solid #EF5350;
+  border-left: 2px solid #EF5350;
+  border-right: 2px solid #D32F2F;
+  box-shadow: 
+    0 6px 0 #B71C1C,
+    0 8px 0 #8B0000,
+    0 10px 10px rgba(0,0,0,0.3);
+}
+
+button.stop-button:hover {
+  background: linear-gradient(to bottom, #EF5350, #D32F2F);
+  box-shadow: 
+    0 8px 0 #B71C1C,
+    0 10px 0 #8B0000,
+    0 12px 15px rgba(0,0,0,0.4);
+}
+
+button.stop-button:active {
+  box-shadow: 
+    0 2px 0 #B71C1C,
+    0 4px 0 #8B0000,
+    0 6px 5px rgba(0,0,0,0.2);
+}
+
+/* Container dos controles */
+.controls-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* Input de tempo */
+input[type="number"] {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 4px 6px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background: #fff;
+  text-align: center;
+  width: 40px;
+  height: 26px;
+}
+
+/* Botão To-Do */
+.todo-button {
+  background-color: #FF9800;
+  color: white;
+  padding: 10px;
+  font-size: 0;
+  min-width: 44px;
+  height: 44px;
+  position: relative;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  box-shadow: 
+    0 6px 0 #E65100,
+    0 8px 0 #BF360C,
+    0 10px 10px rgba(0,0,0,0.3);
+  
+  border-top: 3px solid #FFB74D;
+  border-left: 2px solid #FFB74D;
+  border-right: 2px solid #FF9800;
+}
+
+.todo-button:hover {
+  background: linear-gradient(to bottom, #FFB74D, #FF9800);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 0 #E65100,
+    0 10px 0 #BF360C,
+    0 12px 15px rgba(0,0,0,0.4);
+}
+
+.todo-button:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 2px 0 #E65100,
+    0 4px 0 #BF360C,
+    0 6px 5px rgba(0,0,0,0.2);
+}
+
+/* Ícone da prancheta */
+.clipboard-icon {
+  display: block;
+  width: 16px;
+  height: 20px;
+  position: relative;
+  background: #FFD600;
+  border: 2px solid #000;
+  border-radius: 2px;
+}
+
+.clipboard-icon::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 4px;
+  background: #999;
+  border: 1px solid #000;
+  border-radius: 1px;
+}
+
+.clipboard-icon::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: 
+    #fff,
+    linear-gradient(to right, #00695C 0px, #00695C 10px, transparent 10px),
+    linear-gradient(to right, #00695C 0px, #00695C 10px, transparent 10px),
+    linear-gradient(to right, #00695C 0px, #00695C 10px, transparent 10px),
+    linear-gradient(to right, #00695C 0px, #00695C 10px, transparent 10px);
+  background-position: 0 3px, 0 6px, 0 9px, 0 12px;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+}
+
+/* Container da Tofu */
+.tofu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  position: relative;
+  gap: 15px;
+}
+
+/* Imagem da Tofu */
+.tofu-image {
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.tofu-image:hover {
+  transform: scale(1.05);
+}
+
+.tofu-image:active {
+  transform: scale(0.95);
+}
+
+/* Bolha de fala */
+.speech-bubble {
+  background: white;
+  border: 4px solid black;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 10px;
+  width: 80px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-left-color: white;
+  border-right: 0;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -15px;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-left-color: black;
+  border-right: 0;
+  transform: translateY(-50%) rotate(180deg);
+  z-index: -1;
+}
+
+/* Barra de progresso - SÓ SEGMENTOS */
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 16px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  position: relative;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.progress-segments {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 2px;
+  padding: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.progress-segment {
+  flex: 1;
+  height: 100%;
+  background-color: #e0e0e0;
+  border: 2px solid #000;
+  transition: none;
+  border-radius: 3px;
+  box-shadow: 
+    inset 1px 1px 0px rgba(255,255,255,0.6),
+    inset -1px -1px 0px rgba(0,0,0,0.2);
+}
+
+.progress-segment:first-child {
+  border-radius: 3px;
+}
+
+.progress-segment:last-child {
+  border-radius: 3px;
+}
+
+/* GIF do casal com caixinha */
+.progress-couple-gif {
+  position: absolute;
+  top: -6px;
+  left: 0px;
+  width: 28px;
+  height: 28px;
+  z-index: 20;
+  transition: left 0.3s ease, opacity 0.2s ease;
+  display: none;
+  opacity: 0;
+  
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 2px;
+  
+  box-shadow: 
+    2px 2px 0px #ccc,
+    inset 1px 1px 0px rgba(255,255,255,0.8);
+  
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.progress-couple-gif::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background-image: url('couple.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 2px;
+}
+
+.progress-couple-gif.active {
+  display: block !important;
+  opacity: 1;
+  animation: coupleFloat 3s ease-in-out infinite;
+}
+
+@keyframes coupleFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    box-shadow: 
+      2px 2px 0px #ccc,
+      inset 1px 1px 0px rgba(255,255,255,0.8);
+  }
+  50% { 
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+      3px 3px 2px #aaa,
+      inset 1px 1px 0px rgba(255,255,255,0.9);
+  }
+}
+
+/* Segmentos preenchidos */
+.progress-segment.filled {
+  background-color: #4CAF50;
+  border-color: #2E7D32;
+  box-shadow: 
+    inset 1px 1px 0px #81C784,
+    inset -1px -1px 0px #1B5E20;
+}
+
+.progress-segment.filled:first-child {
+  border-radius: 3px;
+}
+
+.progress-segment.filled:last-child {
+  border-radius: 3px;
+}
+
+.progress-segment.filled.warning {
+  background-color: #FF9800;
+  border-color: #E65100;
+  box-shadow: 
+    inset 1px 1px 0px #FFB74D,
+    inset -1px -1px 0px #BF360C;
+}
+
+.progress-segment.filled.danger {
+  background-color: #F44336;
+  border-color: #B71C1C;
+  animation: dangerPulsePixel 0.5s infinite alternate;
+  box-shadow: 
+    inset 1px 1px 0px #EF5350,
+    inset -1px -1px 0px #8B0000;
+}
+
+@keyframes dangerPulsePixel {
+  0% { background-color: #F44336; }
+  100% { background-color: #EF5350; }
+}
+
+.progress-segment.loading {
+  background-color: #333;
+  animation: pixelFlicker 0.15s infinite alternate;
+}
+
+@keyframes pixelFlicker {
+  0% { 
+    background-color: #333; 
+    opacity: 0.8;
+  }
+  100% { 
+    background-color: #555; 
+    opacity: 1;
+  }
+}
+
+/* Popup de Estatísticas */
+.stats-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.stats-popup.show {
+  display: flex;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.stats-content {
+  background: #ffe066;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 25px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: popIn 0.4s ease-out;
+}
+
+.stats-content h2 {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 0px #ff8b60;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 6px;
+  padding: 12px;
+  gap: 15px;
+}
+
+.stat-icon {
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+}
+
+.stat-info {
+  flex: 1;
+  text-align: left;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 8px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.stats-tip {
+  background: #e8f4f8;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 8px;
+  margin: 15px 0;
+  color: #333;
+}
+
+.close-stats-btn {
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px 20px;
+  background-color: #ff8b60;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 10px;
+  transition: all 0.1s ease;
+}
+
+.close-stats-btn:hover {
+  background-color: #ff7a4d;
+  transform: translateY(-1px);
+}
+
+.close-stats-btn:active {
+  transform: translateY(1px);
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { 
+    transform: scale(0.7) translateY(-20px);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Efeitos visuais */
+.heart-particle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 16px;
+  animation: heartFloat 2s ease-out forwards;
+  z-index: 1000;
+}
+
+@keyframes heartFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-60px) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Presente flutuante */
+.gift-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 15px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-align: center;
+  display: none;
+  z-index: 999;
+  animation: giftBounce 2s infinite ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.gift-notification.show {
+  display: block;
+}
+
+.gift-box {
+  font-size: 32px;
+  margin-bottom: 10px;
+  animation: giftGlow 1.5s infinite alternate;
+}
+
+.gift-message {
+  color: #333;
+  line-height: 1.3;
+}
+
+@keyframes giftBounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes giftGlow {
+  0% { transform: scale(1) rotate(-5deg); }
+  100% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Popup de Presente */
+.gift-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.gift-popup.show {
+  display: flex;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.gift-content {
+  background: #ffe066;
+  border: 4px solid #000;
+  border-radius: 12px;
+  padding: 20px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  max-width: 400px;
+  width: 85%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: giftPopIn 0.6s ease-out;
+}
+
+.gift-content h2 {
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 0px #ff8b60;
+  color: #333;
+}
+
+.gift-photo-frame {
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 15px 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.gift-photo {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 4px;
+  image-rendering: auto;
+}
+
+.gift-love-message {
+  background: #ffb3d9;
+  border: 3px solid #000;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 9px;
+  margin: 15px 0;
+  color: #333;
+  line-height: 1.4;
+}
+
+.close-gift-btn {
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px 20px;
+  background-color: #ff69b4;
+  border: none;
+  cursor: pointer;
+  font-size: 9px;
+  margin-top: 10px;
+  transition: all 0.1s ease;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+}
+
+.close-gift-btn:hover {
+  background-color: #ff1493;
+  transform: translateY(-2px);
+}
+
+.close-gift-btn:active {
+  transform: translateY(1px);
+}
+
+@keyframes giftPopIn {
+  0% { 
+    transform: scale(0.5) rotate(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* TO-DO LIST - CORRIGIDA */
+.todo-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+}
+
+.todo-popup.show {
+  display: flex;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.todo-content-small {
+  background: #ffe066;
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  width: 380px;
+  max-width: 90vw;
+  max-height: 70vh;
+  overflow: hidden;
+  animation: popIn 0.4s ease-out;
+  position: relative;
+}
+
+.todo-content-small h3 {
+  font-size: 16px;
+  margin: 0 0 20px 0;
+  text-shadow: 2px 2px 0px #ff8b60;
+  color: #333;
+}
+
+.todo-input-small {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.todo-input-small input {
+  flex: 1;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 12px;
+  border: 3px solid #000;
+  border-radius: 6px;
+  background: #fff;
+  outline: none;
+}
+
+.add-task-small {
+  font-family: 'Press Start 2P', cursive;
+  padding: 12px 18px;
+  background-color: #4CAF50;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  border-radius: 6px;
+}
+
+.add-task-small:hover {
+  background-color: #45a049;
+}
+
+.tasks-container-small {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  border: 3px solid #000;
+  border-radius: 6px;
+  background: #f9f9f9;
+  padding: 10px;
+}
+
+.tasks-container-small::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tasks-container-small::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.tasks-container-small::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.tasks-container-small::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.close-todo-small {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-family: 'Press Start 2P', cursive;
+  padding: 8px 12px;
+  background-color: #ff4444;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  border-radius: 4px;
+}
+
+.close-todo-small:hover {
+  background-color: #cc0000;
+}
+
+/* LAYOUT CORRIGIDO DA TO-DO LIST */
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.task-item.completed {
+  background: #e8f5e8;
+  opacity: 0.7;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+}
+
+.task-item.romantic {
+  background: linear-gradient(45deg, #ffb3d9, #ffc9e8);
+  border-color: #ff69b4;
+  animation: romanticGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes romanticGlow {
+  0% { box-shadow: 0 0 5px rgba(255, 105, 180, 0.5); }
+  100% { box-shadow: 0 0 15px rgba(255, 105, 180, 0.8); }
+}
+
+.task-content {
+  flex: 1;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.task-text {
+  font-size: 9px;
+  line-height: 1.3;
+  margin-bottom: 3px;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.task-date {
+  font-size: 6px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.task-checkbox {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px;
+  min-width: 20px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.task-checkbox:hover {
+  transform: scale(1.2);
+}
+
+.task-delete {
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px;
+  min-width: 20px;
+  text-align: center;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.task-delete:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+.no-tasks-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.no-tasks-text {
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+/* Galeria de Presentes */
+.gifts-gallery-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.gifts-gallery-popup.show {
+  display: flex;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.gifts-gallery-content {
+  background: #ffe066;
+  border: 4px solid #000;
+  border-radius: 12px;
+  padding: 20px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: giftPopIn 0.6s ease-out;
+}
+
+.gifts-gallery-content h2 {
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 0px #ff8b60;
+  color: #333;
+}
+
+.gifts-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.gift-item {
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gift-item:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-color: #ff69b4;
+}
+
+.gift-item-number {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ff69b4;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.gift-thumbnail {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.gift-info {
+  text-align: center;
+}
+
+.gift-date {
+  font-size: 6px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.no-gifts {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-gifts-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+.no-gifts-text {
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.close-gallery-btn {
+  font-family: 'Press Start 2P', cursive;
+  padding: 12px 24px;
+  background-color: #ff8b60;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  margin-top: 15px;
+  transition: all 0.1s ease;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+}
+
+.close-gallery-btn:hover {
+  background-color: #ff6b4a;
+  transform: translateY(-2px);
+}
+
+.close-gallery-btn:active {
+  transform: translateY(1px);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Timer completed state */
+.timer-display.completed {
+  background: #e8f5e8;
+  border-color: #4CAF50;
+  color: #2e7d32;
+  animation: completedPulse 2s ease-in-out;
+}
+
+@keyframes completedPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}.close-stats-btn {
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px 20px;
+  background-color: #ff8b60;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 10px;
+  transition: all 0.1s ease;
+}
+
+.close-stats-btn:hover {
+  background-color: #ff7a4d;
+  transform: translateY(-1px);
+}
+
+.close-stats-btn:active {
+  transform: translateY(1px);
+}
+
+.view-gifts-btn {
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px 20px;
+  background-color: #ff69b4;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  margin: 10px 5px;
+  transition: all 0.1s ease;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+}
+
+.view-gifts-btn:hover {
+  background-color: #ff1493;
+  transform: translateY(-1px);
+}
